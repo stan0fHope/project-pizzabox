@@ -11,7 +11,9 @@ using PizzaBox.Domain.Abstract;
             {
                 Name = DateTime.Now.Ticks.ToString();
             }
+// dotnet test -p:CollectCoverage=true for testing avg table
 
+//
             public override string ToString()
             {
                 return Name;

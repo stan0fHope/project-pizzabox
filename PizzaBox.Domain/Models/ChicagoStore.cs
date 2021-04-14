@@ -3,8 +3,9 @@ namespace PizzaBox.Domain.Models
 {
     public class ChicagoStore : AStore
     {
-        public ChicagoStore(){
-            return AStore();
+        public ChicagoStore()
+        {
+            Name = "ChicagoStore";
         }
     }
 }
