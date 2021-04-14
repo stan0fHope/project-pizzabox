@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
+using PizzaBox.Domain.Models;
 using sc = System.Console;
     namespace PizzaBox.Client
     {//client side (namespace)
@@ -9,7 +10,7 @@ using sc = System.Console;
             {
                 //arrays are static; linked list easy to add, long to search
                 //flex of linked, easy of array => list
-                var stores = new List<string> {"Store 01", "Store 02"};
+                var stores = new List<AStore> {new ChicagoStore(), new NYStore()};
                 List<string> storeList = new List<string> {"Store 01", "Store 02"};
                 //^var runtime will fill in data-type info
                 //aka var x = null
