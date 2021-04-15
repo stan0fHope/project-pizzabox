@@ -1,22 +1,24 @@
-﻿using System.Collections.Generic;
-using System;
-using sc = System.Console;
-using PizzaBox.Domain.Abstract;
-    namespace PizzaBox.Client
-    {//client side (namespace)
-        public abstract class AStore //class
-        {
-            string Name;
-            public AStore()
-            {
-                Name = DateTime.Now.Ticks.ToString();
-            }
-// dotnet test -p:CollectCoverage=true for testing avg table
+﻿using System;
+using System.Collections.Generic;
+using PizzaBox.Domain.Models;
 
-//
-            public override string ToString()
-            {
-                return Name;
-            }
-        }
+namespace PizzaBox.Domain.Abstracts
+{
+  /// <summary>
+  /// 
+  /// </summary>
+  public abstract class AStore : Object
+  {
+    public string Name { get; protected set; }
+    public List<Order> Orders { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+      return Name;
     }
+  }
+}
