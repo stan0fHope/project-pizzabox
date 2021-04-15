@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using PizzaBox.Domain.Models.Stores;
+using System.Xml.Serialization;
+using System.IO;
 using PizzaBox.Domain.Models;
+// using PizzaBox.Domain.Models.Stores;
 
 namespace PizzaBox.Domain.Abstracts
 {
-  /// <summary>
-  /// 
-  /// </summary>
-  public abstract class AStore : Object
-  {
-    public string Name { get; protected set; }
-    public List<Order> Orders { get; set; }
-
     /// <summary>
     /// 
     /// </summary>
-    /// <returns></returns>
-    public override string ToString()
+    [XmlInclude(typeof(ChicagoStore))]
+    [XmlInclude(typeof(NewYorkStore))]
+    public abstract class AStore : Object
     {
-      return Name;
+        public string Name { get; set; }
+        public List<Order> Orders { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return Name;
+        }
     }
-  }
 }
