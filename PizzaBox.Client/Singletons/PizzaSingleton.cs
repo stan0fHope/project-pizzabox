@@ -1,16 +1,20 @@
 using System.Collections.Generic;
-// using PizzaBox.Domain.Abstract;
-using PizzaBox.Domain.Models;
+using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models.Pizzas;
+using PizzaBox.Domain.Models.Stores;
+
 namespace PizzaBox.Client.Singletons
-{//Make/In-chraged of Stores make/change
-    public class PizzaSingleton
+{
+  /// <summary>
+  /// 
+  /// </summary>
+  public class PizzaSingleton
+  {
+    public static List<APizza> pizzas = new List<APizza>
     {
-        public static List<APizza> stores = new List<AStore>
-        //make static list of stores, avoid changes to them
-        {
-            new CustomPizza(),
-            new MeatPizza(),
-            new VeggiePizza();
-        }
-    }
+      new CustomPizza(),
+      new MeatPizza(),
+      new VeggiePizza()
+    };
+  }
 }
