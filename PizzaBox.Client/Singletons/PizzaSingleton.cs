@@ -8,6 +8,7 @@ namespace PizzaBox.Client.Singletons
   /// <summary>
   /// 
   /// </summary>
+
   public class PizzaSingleton
   {
     public static List<APizza> pizzas = new List<APizza>

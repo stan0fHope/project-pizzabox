@@ -14,11 +14,11 @@ namespace PizzaBox.Client
     public class Program
     {
         private static readonly List<APizza> _pizza = new List<APizza>()
-    {
-      new CustomPizza(),
-      new MeatPizza(),
-      new VeggiePizza()
-    };
+        {
+            new CustomPizza(),
+            new MeatPizza(),
+            new VeggiePizza()
+        };
 
         private static readonly List<AStore> _stores = new List<AStore>()
     {
@@ -58,7 +58,7 @@ namespace PizzaBox.Client
         }
 
         /// <summary>
-        /// 
+        /// ordeering 
         /// </summary>
         private static void PrintPizzaList()
         {
