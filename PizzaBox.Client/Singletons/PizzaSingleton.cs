@@ -1,21 +1,41 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
-using PizzaBox.Domain.Models.Pizzas;
-using PizzaBox.Domain.Models.Stores;
+using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client.Singletons
 {
   /// <summary>
   /// 
   /// </summary>
-
   public class PizzaSingleton
   {
-    public static List<APizza> pizzas = new List<APizza>
+    private const string _path = @"data/Pizzas.xml";
+    private readonly FileRepository _fileRepository = new FileRepository();
+    private static PizzaSingleton _instance;
+
+    public List<APizza> Pizzas { get; }
+    public static PizzaSingleton Instance
     {
-      new CustomPizza(),
-      new MeatPizza(),
-      new VeggiePizza()
-    };
+      get
+      {
+        if (_instance == null)
+        {
+          _instance = new PizzaSingleton();
+        }
+
+        return _instance;
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private PizzaSingleton()
+    {
+      if (Pizzas == null)
+      {
+        Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
+      }
+    }
   }
 }
