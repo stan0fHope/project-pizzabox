@@ -1,4 +1,5 @@
 using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Abstract.APizza;
 
 namespace PizzaBox.Domain.Models.Pizzas
 {
@@ -7,6 +8,6 @@ namespace PizzaBox.Domain.Models.Pizzas
   /// </summary>
   public class CustomPizza : APizza
   {
-
+    
   }
 }

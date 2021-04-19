@@ -7,20 +7,20 @@ namespace PizzaBox.Client.Singletons
   /// <summary>
   /// 
   /// </summary>
-  public class StoreSingleton
+  public class ToppingSingleton
   {
-    private const string _path = @"data/stores.xml";
+    private const string _path = @"data/Toppings.xml";
     private readonly FileRepo _fileRepo = new FileRepo();
-    private static StoreSingleton _instance;
+    private static ToppingSingleton _instance;
 
-    public List<AStore> Stores { get; }
-    public static StoreSingleton Instance
+    public List<AComponent> Toppings { get; }
+    public static ToppingSingleton Instance
     {
       get
       {
         if (_instance == null)
         {
-          _instance = new StoreSingleton();
+          _instance = new ToppingSingleton();
         }
 
         return _instance;
@@ -30,11 +30,11 @@ namespace PizzaBox.Client.Singletons
     /// <summary>
     /// 
     /// </summary>
-    private StoreSingleton()
+    private ToppingSingleton()
     {
-      if (Stores == null)
+      if (Toppings == null)
       {
-        Stores = _fileRepo.ReadFromFile<List<AStore>>(_path);
+        Toppings = _fileRepo.ReadFromFile<List<AComponent>>(_path);
       }
     }
   }

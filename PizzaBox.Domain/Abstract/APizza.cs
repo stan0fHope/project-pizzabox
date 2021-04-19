@@ -42,7 +42,7 @@ namespace PizzaBox.Domain.Abstracts
     /// </summary>
     protected virtual void AddCrust() 
     {
-      // Crust = new Crust() { Name = "Org"}
+      Crust = new Crust() { Name = "Org"}
       //Crust = new Crust() { Name = CrustEnum.ThinCrust}
 
     }
@@ -52,7 +52,7 @@ namespace PizzaBox.Domain.Abstracts
     /// </summary>
     protected virtual void AddSize()
     {
-      // Size = new Size() {Name = "Big"}
+      Size = new Size() {Name = "Big"}
     }
 
     /// <summary>
