@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
-using PizzaBox.Storing.Repositories;
+using PizzaBox.Storing.Repo;
 
 namespace PizzaBox.Client.Singletons
 {
@@ -10,7 +10,7 @@ namespace PizzaBox.Client.Singletons
   public class ComponentSingleton
   {
     private const string _path = @"data/Components.xml";
-    private readonly FileRepository _fileRepository = new FileRepository();
+    private readonly FileRepo _fileRepoy = new FileRepo();
     private static ComponentSingleton _instance;
 
     public List<AComponent> Components { get; }
@@ -34,7 +34,7 @@ namespace PizzaBox.Client.Singletons
     {
       if (Components == null)
       {
-        Components = _fileRepository.ReadFromFile<List<AComponent>>(_path);
+        Components = _fileRepo.ReadFromFile<List<AComponent>>(_path);
       }
     }
   }
