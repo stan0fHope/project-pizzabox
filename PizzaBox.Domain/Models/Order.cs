@@ -13,7 +13,8 @@ namespace PizzaBox.Domain.Models
     {
       get
       {
-        return (Pizza.Crust.Price + Pizza.Size.Price + Pizza.Toppings.Price);
+        // return (Pizza.Crust.Price + Pizza.Size.Price + Pizza.Toppings.Price);
+        return 50;
       }
     }
   }
