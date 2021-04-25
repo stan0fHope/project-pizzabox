@@ -1,31 +1,31 @@
 using Microsoft.EntityFrameworkCore;
-using PizzaBox.Domain.Abstract;
+using Microsoft.Extensions.Configuration;
+using PizzaBox.Domain.Abstracts;
 
-namespace PizzaBox.Storing;
+// sqladmin, yugioh120
+namespace PizzaBox.Storing
 {
   public class PizzaBoxContext : DbContext
   {
-    private static readonly IConfiguration _config;
-    // The XML Includes is covered
-    public DbSet<AStore> Stores {get; set;} //Implicit serialization & casting
-    public DbSet<APizza> Pizzas {get; set;}
+    private readonly Iconfig _config;
+    public DbSet<AStore> Stores { get; set; } // implicit serialization, implicit casting
+    public DbSet<APizza> Pizzas { get; set; }
 
-    public PizzaBoxContext(IConfiguration config)
+    public 
+    public PizzaBoxContext(Iconfig config)
     {
       _config = config;
     }
 
-    // the writer & reader is covered
-    protected void OnConfiguring(DbContextOptionsBuilder builder)
+    protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-      builder.UseSqlServer(_config["mssql"]); // needs a path 
+      builder.UseSqlServer(_config["mssql"]);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
       builder.Entity<AStore>().HasKey(e => e.EntityId);
       builder.Entity<APizza>().HasKey(e => e.EntityId);
-      //ranking does matter
     }
   }
 }
