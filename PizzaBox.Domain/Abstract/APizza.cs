@@ -17,6 +17,7 @@ namespace PizzaBox.Domain.Abstracts
     public Crust Crust { get; set; }
     // public CrustEnum CrustEnum; if using enum, gotta recompile for chngs
     public Size Size { get; set; }
+    public long SizeEntityId { get; set; }
     public List<Topping> Toppings { get; set; }
 
     protected APizza()
@@ -34,38 +35,20 @@ namespace PizzaBox.Domain.Abstracts
       AddToppings();
     }
 
-    /// <summary>
+     /// <summary>
     /// 
-    /// Virtual so subclass can override & improve.
-    /// Ie. Meat/Veggie can make themselves accordingly
-    /// Custom can use user input 
     /// </summary>
-    protected virtual void AddCrust() 
-    {
-      Crust = new Crust() { Name = "Org"};
-      //Crust = new Crust() { Name = CrustEnum.ThinCrust}
-
-    }
+    public abstract void AddCrust(Crust crust = null);
 
     /// <summary>
     /// 
     /// </summary>
-    protected virtual void AddSize()
-    {
-      Size = new Size() {Name = "Big"};
-    }
+    public abstract void AddSize(Size size = null);
 
     /// <summary>
     /// 
-    /// Abstract could work too, as parent has no default
-    /// ie. protected abstract void AddToppings(); must be overriden
     /// </summary>
-    protected virtual void AddToppings()
-    {
-      Toppings.Add(new Topping() { Name = "Mozzarella"});
-      Toppings.Add(new Topping() { Name = "Marinara Sauce"});
-      Toppings.Add(new Topping() { Name = "Pepperoni"});
-    }
+    public abstract void AddToppings(params Topping[] toppings);
 
     /// <summary>
     /// 
