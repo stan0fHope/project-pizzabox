@@ -1,4 +1,5 @@
 using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Abstracts.AModel;
 
 namespace PizzaBox.Domain.Models
 {
@@ -8,6 +9,7 @@ namespace PizzaBox.Domain.Models
   public class Customer : AModel
   {
     public string Name { get; set; }
+    // idk
 
     /// <summary>
     /// 
