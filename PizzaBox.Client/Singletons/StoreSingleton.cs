@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
-using PizzaBox.Storing.Repositories;
+using PizzaBox.Storing.Repo;
 
 namespace PizzaBox.Client.Singletons
 {
@@ -14,7 +14,7 @@ namespace PizzaBox.Client.Singletons
   public class StoreSingleton
   {
     private const string _path = @"data/stores.xml";
-    private readonly FileRepository _fileRepository = new FileRepository();
+    private readonly FileRepo _fileRepo = new FileRepo();
     private readonly PizzaBoxContext _context = new PizzaBoxContext();
     private static StoreSingleton _instance;
 

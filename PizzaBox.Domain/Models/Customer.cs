@@ -1,5 +1,4 @@
 using PizzaBox.Domain.Abstracts;
-using PizzaBox.Domain.Abstracts.AModel;
 
 namespace PizzaBox.Domain.Models
 {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using PizzaBox.Domain.Abstracts;
 
-namespace PizzaBox.Storing.Repositories
+namespace PizzaBox.Storing.Repo
 {
   /// <summary>
   /// 

@@ -1,4 +1,6 @@
-namespace PizzaBox.Domain.Abstract
+using PizzaBox.Domain.Models;
+
+namespace PizzaBox.Domain.Abstracts
 {
   // idk
   public abstract class AModel

@@ -3,7 +3,7 @@ using System.Linq;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models.Pizzas;
 using PizzaBox.Storing;
-using PizzaBox.Storing.Repositories;
+using PizzaBox.Storing.Repo;
 
 namespace PizzaBox.Client.Singletons
 {
@@ -12,7 +12,7 @@ namespace PizzaBox.Client.Singletons
   /// </summary>
   public class PizzaSingleton
   {
-    private readonly FileRepository _fileRepository = new FileRepository();
+    private readonly FileRepo _fileRepo = new FileRepo();
     private static PizzaSingleton _instance;
     private const string _path = @"data/pizzas.xml";
     private readonly PizzaBoxContext _context = new PizzaBoxContext();

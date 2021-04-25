@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
-// using PizzaBox.Storing;
+using PizzaBox.Storing;
 
 namespace PizzaBox.Client.Singletons
 {
