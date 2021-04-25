@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using PizzaBox.Domain;
 using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Storing.Repo
