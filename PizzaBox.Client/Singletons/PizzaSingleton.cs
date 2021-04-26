@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PizzaBox.Domain.Abstracts;
@@ -38,8 +39,10 @@ namespace PizzaBox.Client.Singletons
     {
       // _context.Pizzas.AddRange(_fileRepository.ReadFromFile<List<APizza>>(_path));
       var cp = new CustomPizza();
-      cp.Size = _context.Sizes.FirstOrDefault(s => s.Name == "Medium", s.Price == 8.00);
-      cp.Crust = _context.Crust.FirstOrDefault(c => c.Name == "Thin", c.Price == 5.00 );
+      cp.Size = _context.Sizes.FirstOrDefault(s => s.Name == "Medium");
+      cp.Size = _context.Sizes.FirstOrDefault(s => s.Price = 3.90m);
+
+      // cp.Crust = _context.Crusts.FirstOrDefault(c => c.Name == "Thin");
       // cp.Toppings = _context.Toppings.FirstOrDefault(s => s.Name == "Medium");
 
       _context.Add(cp);

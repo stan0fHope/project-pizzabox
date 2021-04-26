@@ -33,13 +33,15 @@ namespace PizzaBox.Client
       order.Customer = new Customer();
 
       Console.WriteLine("Welcome to PizzaBox");
+      order.Store = SelectStore();
+
       Console.WriteLine("Please enter your first name (only): ");
       order.Customer.Name = Console.ReadLine();
       // Console.WriteLine(order.Customer.Name);
 
       //  'Server=tcp:pizzaboxsql12.database.windows.net,1433;Initial Catalog=PizzaBoxDB;Persist Security Info=False;User ID=sqladmin;Password={Yugioh120};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
       
-      order.Store = SelectStore();
+      // order.Store = SelectStore();
       order.Pizzas = SelectPizza();
     }
 
