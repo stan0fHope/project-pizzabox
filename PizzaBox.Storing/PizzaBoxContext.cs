@@ -76,7 +76,7 @@ namespace PizzaBox.Storing
 
       builder.Entity<Customer>().HasData(new Customer[]
       {
-        new Customer() { EntityId = 1, Name = "Uncle John" }
+        new Customer() { EntityId = 1, FirstName = "Uncle", LastName = "John" }
       });
     }
   }

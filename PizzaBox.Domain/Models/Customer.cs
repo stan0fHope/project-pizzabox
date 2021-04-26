@@ -7,7 +7,8 @@ namespace PizzaBox.Domain.Models
   /// </summary>
   public class Customer : AModel
   {
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
     // idk
 
     /// <summary>
@@ -16,7 +17,7 @@ namespace PizzaBox.Domain.Models
     /// <returns></returns>
     public override string ToString()
     {
-      return $"{Name}";
+      return $"{FirstName} + {LastName}";
     }
   }
 }

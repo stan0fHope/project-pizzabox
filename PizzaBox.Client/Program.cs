@@ -34,15 +34,19 @@ namespace PizzaBox.Client
 
       Console.WriteLine("Welcome to PizzaBox");
       order.Store = SelectStore();
+      // Yugioh120!
 
-      Console.WriteLine("Please enter your first name (only): ");
-      order.Customer.Name = Console.ReadLine();
+      // Console.WriteLine("Please enter your first & last name: ");
+      string fullname = Console.ReadLine();
+      var names = fullname.Split(' '); 
+      // order.Customer.FirstName = names[0];
+      // order.Customer.LastName = names[1];
       // Console.WriteLine(order.Customer.Name);
 
-      //  'Server=tcp:pizzaboxsql12.database.windows.net,1433;Initial Catalog=PizzaBoxDB;Persist Security Info=False;User ID=sqladmin;Password={Yugioh120};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+      // dotnet user-secrets set mssql 'Server=tcp:pizzaboxsql12.database.windows.net,1433;Initial Catalog=PizzaBoxDB;Persist Security Info=False;User ID=sqladmin;Password={Yugioh120};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
       
       // order.Store = SelectStore();
-      order.Pizzas = SelectPizza();
+      // order.Pizzas = SelectPizza();
     }
 
     /// <summary>
@@ -126,7 +130,7 @@ namespace PizzaBox.Client
     private static AStore SelectStore()
     {
       PrintStoreList();
-      Console.WriteLine("Please enter the number of the store you would like to order from: ");
+      Console.WriteLine("Please select the store you'd like to order from: ");
       var valid = int.TryParse(Console.ReadLine(), out int input);
 
       if (!valid)
@@ -135,5 +139,30 @@ namespace PizzaBox.Client
       }
       return _storeSingleton.Stores[input - 1];
     }
+
+
+    private static void RemovePizza()
+    {
+      Console.WriteLine("Please select which pizza you would like to remove: ");
+      var valid = int.TryParse(Console.ReadLine(), out int input);
+
+      if (!valid)
+      {
+        return null;
+      }
+      else if((input -1) > order.Pizzas.Count())
+      {
+        Console.WriteLine("That was an invalid choice. Please try again.");
+      }
+      else
+      {
+        order.Pizzas.RemoveAt(input - 1);
+      }
+    }
+
+
+    
   }
 }
+
+
