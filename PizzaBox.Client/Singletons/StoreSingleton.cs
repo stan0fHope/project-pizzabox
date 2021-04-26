@@ -52,7 +52,7 @@ namespace PizzaBox.Client.Singletons
       // EF Loading = Eager Loading
       var orders = _context.Stores //load all stores
                     .Include(s => s.Orders) // load all orders for all stores
-                    .ThenInclude(o => o.Pizza) // load all pizzas for all orders
+                    .ThenInclude(o => o.Pizzas) // load all pizzas for all orders
                     .Where(s => s.Name == store.Name); // LINQ = lang integrated query
 
       // EF Explicit Loading

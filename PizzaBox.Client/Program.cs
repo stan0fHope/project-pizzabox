@@ -30,13 +30,17 @@ namespace PizzaBox.Client
     private static void Run()
     {
       var order = new Order();
+      order.Customer = new Customer();
 
       Console.WriteLine("Welcome to PizzaBox");
-      PrintStoreList();
+      Console.WriteLine("Please enter your first name (only): ");
+      order.Customer.Name = Console.ReadLine();
+      // Console.WriteLine(order.Customer.Name);
 
-      order.Customer = new Customer();
+      //  'Server=tcp:pizzaboxsql12.database.windows.net,1433;Initial Catalog=PizzaBoxDB;Persist Security Info=False;User ID=sqladmin;Password={Yugioh120};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+      
       order.Store = SelectStore();
-      order.Pizza = SelectPizza();
+      order.Pizzas = SelectPizza();
     }
 
     /// <summary>
@@ -44,7 +48,7 @@ namespace PizzaBox.Client
     /// </summary>
     private static void PrintOrder(APizza pizza)
     {
-      Console.WriteLine($"Your order is: {pizza}");
+      Console.WriteLine($"Your order includes: {pizza}");
     }
 
     /// <summary>
@@ -77,20 +81,40 @@ namespace PizzaBox.Client
     /// 
     /// </summary>
     /// <returns></returns>
-    private static APizza SelectPizza()
+    private static List<APizza> SelectPizza()
     {
-      var valid = int.TryParse(Console.ReadLine(), out int input);
-
-      if (!valid)
+      List<APizza> orderPizza = new List<APizza>();
+      bool extra = true;
+      while (extra)
       {
-        return null;
+        PrintPizzaList();
+        Console.WriteLine("Please select the pizza you would order from: ");      
+
+        var valid1 = int.TryParse(Console.ReadLine(), out int input1);
+
+        if (!valid1)
+        {
+          return null;
+        }
+
+        var pizza = _pizzaSingleton.Pizzas[input1 - 1];
+        PrintOrder(pizza);
+        orderPizza.Add(pizza);
+
+        Console.WriteLine("If you would like to add another pizza, enter 1. If ready to submit order, enter 0: "); 
+        var valid2 = int.TryParse(Console.ReadLine(), out int input2);
+
+        if (!valid2)
+        {
+          return null;
+        }
+
+        if(input2 == 0)
+        {
+          extra = false;
+        }
       }
-
-      var pizza = _pizzaSingleton.Pizzas[input - 1];
-
-      PrintOrder(pizza);
-
-      return pizza;
+      return orderPizza;
     }
 
     /// <summary>
@@ -99,15 +123,14 @@ namespace PizzaBox.Client
     /// <returns></returns>
     private static AStore SelectStore()
     {
+      PrintStoreList();
+      Console.WriteLine("Please enter the number of the store you would like to order from: ");
       var valid = int.TryParse(Console.ReadLine(), out int input);
 
       if (!valid)
       {
         return null;
       }
-
-      PrintPizzaList();
-
       return _storeSingleton.Stores[input - 1];
     }
   }
