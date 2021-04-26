@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using PizzaBox.Client.Singletons;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Models.Stores;
 using PizzaBox.Domain.Models.Pizzas;
+
 
 namespace PizzaBox.Client
 {
@@ -15,6 +17,10 @@ namespace PizzaBox.Client
   {
     private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
     private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+
+    private static int MAX_PIZZAS = 50;
+    private static int MAX_COST = 250;
+
 
     /// <summary>
     /// 
@@ -42,17 +48,23 @@ namespace PizzaBox.Client
       // order.Customer.FirstName = names[0];
       // order.Customer.LastName = names[1];
       // Console.WriteLine(order.Customer.Name);
-
-      // dotnet user-secrets set mssql 'Server=tcp:pizzaboxsql12.database.windows.net,1433;Initial Catalog=PizzaBoxDB;Persist Security Info=False;User ID=sqladmin;Password={Yugioh120};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
       
       // order.Store = SelectStore();
       // order.Pizzas = SelectPizza();
+
+      // Finialize order & print
+      // DB confirm
+      // timestamps 
+
+      // gotta instasitate & add ref of context
+      // before submitting/saving order
+      // to DB
     }
 
     /// <summary>
     /// 
     /// </summary>
-    private static void PrintOrder(APizza pizza)
+    private static void PrintFinal(APizza pizza)
     {
       Console.WriteLine($"Your order includes: {pizza}");
     }
@@ -67,6 +79,20 @@ namespace PizzaBox.Client
       foreach (var item in _pizzaSingleton.Pizzas)
       {
         Console.WriteLine($"{++index} - {item}");
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private static void PrintOrder(List<APizza> orderList)
+    {
+      // var index = 0;
+      Console.WriteLine($"Your order consists of: ");
+      
+      foreach (var item in orderList)
+      {
+        Console.WriteLine($"{item}");
       }
     }
 
@@ -104,8 +130,9 @@ namespace PizzaBox.Client
         }
 
         var pizza = _pizzaSingleton.Pizzas[input1 - 1];
-        PrintOrder(pizza);
         orderPizza.Add(pizza);
+        PrintOrder(orderPizza);
+        
 
         Console.WriteLine("If you would like to add another pizza, enter 1. If ready to submit order, enter 0: "); 
         var valid2 = int.TryParse(Console.ReadLine(), out int input2);
@@ -120,6 +147,10 @@ namespace PizzaBox.Client
           extra = false;
         }
       }
+
+      // while(orderPizza.Count > MAX_PIZZAS){
+      //   RemovePizza(orderPizza);
+      // }
       return orderPizza;
     }
 
@@ -141,27 +172,28 @@ namespace PizzaBox.Client
     }
 
 
-    private static void RemovePizza()
+    private static void RemovePizza(List<APizza> pizzaList)
     {
       Console.WriteLine("Please select which pizza you would like to remove: ");
       var valid = int.TryParse(Console.ReadLine(), out int input);
+      var x = pizzaList.Count();
 
       if (!valid)
       {
-        return null;
+        Console.WriteLine("That was an invalid value. Please try again.");
       }
-      else if((input -1) > order.Pizzas.Count())
+      else if((input -1) > x)
       {
         Console.WriteLine("That was an invalid choice. Please try again.");
       }
       else
       {
-        order.Pizzas.RemoveAt(input - 1);
+        pizzaList.RemoveAt(input - 1);
       }
     }
 
 
-    
+
   }
 }
 
