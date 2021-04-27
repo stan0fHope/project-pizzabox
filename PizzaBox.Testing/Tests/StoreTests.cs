@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models.Pizzas;
 using PizzaBox.Domain.Models.Stores;
 using Xunit;
 
@@ -41,6 +42,20 @@ namespace PizzaBox.Testing.Tests
             Assert.True(sut.Name.Equals("NewYorkStore"));
         }
 
+        [Fact]
+        public void Test_MeatPizza()
+        {
+            var meat_pie = new MeatPizza();
+            Assert.True(meat_pie.Size.Equal("Medium"));
+        }
+
+        [Fact]
+        public void Test_VeggiePizza()
+        {
+            var veg_pie = new VeggiePizza();
+            Assert.True(veg_pie.Size.Equal("Medium"));
+            
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -65,5 +80,6 @@ namespace PizzaBox.Testing.Tests
         {
             Assert.NotNull(storeName);
         }
+        
     }
 }
