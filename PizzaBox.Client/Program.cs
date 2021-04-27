@@ -49,31 +49,62 @@ namespace PizzaBox.Client
       var names = fullname.Split(' ');       
       order.Customer.FirstName = names[0];
       order.Customer.LastName = names[1];      
+           
       order.Store = SelectStore();
+      order.Pizzas = SelectPizza();
+      PrintFinal(order);
 
-
-     
-      // Console.WriteLine(order.Customer.Name);
-      
-      // order.Store = SelectStore();
-      // order.Pizzas = SelectPizza();
-
-      // Finialize order & print
-      // DB confirm
-      // timestamps 
-
-      // gotta instasitate & add ref of context
-      // before submitting/saving order
-      // to DB
     }
 
     /// <summary>
     /// 
     /// </summary>
-    private static void PrintFinal(APizza pizza)
+    private static void PrintFinal(Order order)
     {
-      Console.WriteLine($"Your order includes: {pizza}");
+      Console.WriteLine("Your order includes: ");
+      foreach (var item in order.Pizzas)
+      {
+        Console.WriteLine($"{item} ");
+      }
+      var full = order.TotalCost());
+      Console.WriteLine($"For a total of: ${full}", full);
+      
+      _orderRepo.Create(order);
+
+      var orders = _context.Orders.Where(o => (o.Customer.FirstName == order.Customer.FirstName) &  (o.Customer.LastName == order.Customer.LastName));
+
+      PrintListToScreen(orders);
     }
+
+
+    private static void PrintListToScreen(IEnumerable<object> items)
+    {
+      var index = 0;
+
+      foreach (var item in items)
+      {
+        Console.WriteLine($"{++index} - {item}");
+      }
+    }
+
+
+    private static Customer SelectCustomer()
+    {
+      var valid = int.TryParse(Console.ReadLine(), out int input);
+
+      if (!valid)
+      {
+        return null;
+      }
+
+      var customer = _customerSingleton.Customers[input - 1];
+
+      PrintStoreList();
+
+      return customer;
+    }
+
+
 
     /// <summary>
     /// 

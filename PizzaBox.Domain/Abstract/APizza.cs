@@ -70,9 +70,10 @@ namespace PizzaBox.Domain.Abstracts
       return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
     }
 
+
     // public static decimal TotalPrice()
     // {
-
+    //   return (Crust.Price + Size.Price + )
     // }
   }
 }

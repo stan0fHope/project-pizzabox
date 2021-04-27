@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaBox.Storing;
 
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxContext))]
-    partial class PizzaBoxContextModelSnapshot : ModelSnapshot
+    [Migration("20210427004138_initial-migrations")]
+    partial class initialmigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,32 +91,6 @@ namespace PizzaBox.Storing.Migrations
                     b.HasKey("EntityId");
 
                     b.ToTable("Crust");
-
-                    b.HasData(
-                        new
-                        {
-                            EntityId = 1L,
-                            Name = "Thin",
-                            Price = 4.00m
-                        },
-                        new
-                        {
-                            EntityId = 2L,
-                            Name = "Stuffed",
-                            Price = 6.00m
-                        },
-                        new
-                        {
-                            EntityId = 3L,
-                            Name = "Brooklyn",
-                            Price = 6.00m
-                        },
-                        new
-                        {
-                            EntityId = 4L,
-                            Name = "Deep-Dish",
-                            Price = 5.00m
-                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Customer", b =>
@@ -140,18 +116,6 @@ namespace PizzaBox.Storing.Migrations
                             EntityId = 1L,
                             FirstName = "Uncle",
                             LastName = "John"
-                        },
-                        new
-                        {
-                            EntityId = 2L,
-                            FirstName = "Kevin",
-                            LastName = "Spacer"
-                        },
-                        new
-                        {
-                            EntityId = 3L,
-                            FirstName = "Sharon",
-                            LastName = "Carten"
                         });
                 });
 
@@ -193,32 +157,6 @@ namespace PizzaBox.Storing.Migrations
                     b.HasKey("EntityId");
 
                     b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            EntityId = 1L,
-                            Name = "Small",
-                            Price = 6.00m
-                        },
-                        new
-                        {
-                            EntityId = 2L,
-                            Name = "Medium",
-                            Price = 10.00m
-                        },
-                        new
-                        {
-                            EntityId = 3L,
-                            Name = "Large",
-                            Price = 14.00m
-                        },
-                        new
-                        {
-                            EntityId = 4L,
-                            Name = "XL",
-                            Price = 18.00m
-                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Topping", b =>
@@ -242,56 +180,6 @@ namespace PizzaBox.Storing.Migrations
                     b.HasIndex("APizzaEntityId");
 
                     b.ToTable("Topping");
-
-                    b.HasData(
-                        new
-                        {
-                            EntityId = 1L,
-                            Name = "Pepperoni",
-                            Price = 1.50m
-                        },
-                        new
-                        {
-                            EntityId = 2L,
-                            Name = "Chicken",
-                            Price = 1.50m
-                        },
-                        new
-                        {
-                            EntityId = 3L,
-                            Name = "Bacon",
-                            Price = 1.50m
-                        },
-                        new
-                        {
-                            EntityId = 4L,
-                            Name = "Mushrooms",
-                            Price = 1.00m
-                        },
-                        new
-                        {
-                            EntityId = 5L,
-                            Name = "Spinach",
-                            Price = 1.00m
-                        },
-                        new
-                        {
-                            EntityId = 6L,
-                            Name = "Anchovies",
-                            Price = 1.25m
-                        },
-                        new
-                        {
-                            EntityId = 7L,
-                            Name = "Pineapples",
-                            Price = 1.00m
-                        },
-                        new
-                        {
-                            EntityId = 8L,
-                            Name = "Jalapenos",
-                            Price = 1.00m
-                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Pizzas.CustomPizza", b =>
@@ -326,11 +214,6 @@ namespace PizzaBox.Storing.Migrations
                         {
                             EntityId = 1L,
                             Name = "Chitown Main Street"
-                        },
-                        new
-                        {
-                            EntityId = 3L,
-                            Name = "Lowtown Best Slices"
                         });
                 });
 

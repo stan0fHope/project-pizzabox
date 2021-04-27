@@ -19,8 +19,6 @@ namespace PizzaBox.Storing
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Size> Sizes { get; set; }
     public DbSet<Order> Orders { get; set; }
-    // public DbSet<Topping> Toppings { get; set; }
-
 
     /// <summary>
     /// 
@@ -70,7 +68,8 @@ namespace PizzaBox.Storing
 
       builder.Entity<ChicagoStore>().HasData(new ChicagoStore[]
       {
-        new ChicagoStore() { EntityId = 1, Name = "Chitown Main Street" }
+        new ChicagoStore() { EntityId = 1, Name = "Chitown Main Street" },
+        new ChicagoStore() { EntityId = 3, Name = "Lowtown Best Slices" }
       });
 
       builder.Entity<NewYorkStore>().HasData(new NewYorkStore[]
@@ -78,9 +77,75 @@ namespace PizzaBox.Storing
         new NewYorkStore() { EntityId = 2, Name = "Big Apple" }
       });
 
+      builder.Entity<Crust>().HasData(new Crust[]
+      {
+        new Crust() { EntityId = 1, Name = "Thin", Price = 4.00M },
+        new Crust() { EntityId = 2, Name = "Stuffed", Price = 6.00M },
+        new Crust() { EntityId = 3, Name = "Brooklyn", Price = 6.00M },
+        new Crust() { EntityId = 4, Name = "Deep-Dish", Price = 5.00M }
+      });
+
+      builder.Entity<Size>().HasData(new Size[]
+      {
+        new Size() { EntityId = 1, Name = "Small", Price = 6.00M },
+        new Size() { EntityId = 2, Name = "Medium", Price = 10.00M },
+        new Size() { EntityId = 3, Name = "Large", Price = 14.00M },
+        new Size() { EntityId = 4, Name = "XL", Price = 18.00M }
+      });
+
+      builder.Entity<Topping>().HasData(new Topping[]
+      {
+        new Topping() { EntityId = 1, Name = "Pepperoni", Price = 1.50M },
+        new Topping() { EntityId = 2, Name = "Chicken", Price = 1.50M },
+        new Topping() { EntityId = 3, Name = "Bacon", Price = 1.50M },
+        new Topping() { EntityId = 4, Name = "Mushrooms", Price = 1.00M },
+        new Topping() { EntityId = 5, Name = "Spinach", Price = 1.00M },
+        new Topping() { EntityId = 6, Name = "Anchovies", Price = 1.25M },
+        new Topping() { EntityId = 7, Name = "Pineapples", Price = 1.00M },
+        new Topping() { EntityId = 8, Name = "Jalapenos", Price = 1.00M }
+      });
+
+      // builder.Entity<CustomPizza>().HasData(new CustomPizza[]
+      // {
+      //   new CustomPizza() { EntityId = 1},
+      //   new CustomPizza() { EntityId = 2},
+      //   new CustomPizza() { EntityId = 3},
+      //   new CustomPizza() { EntityId = 4}
+      // });
+
+
+
+      // builder.Entity<MeatPizza>().HasData(new MeatPizza[]
+      // {
+      //   new MeatPizza(){EntityId = 1, Size.Name = "Medium", Size.Price = 10.00M, Crust.Name = "Stuffed", Crust.Price = 6.00M,
+      //     Toppings.Add(Topping.Name = "Bacon", Topping.Price = 1.50M),
+      //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
+      //   }
+
+      //   new MeatPizza(){EntityId = 2, Size.Name = "Small", Size.Price = 6.00M, Crust.Name = "Brooklyn", Crust.Price = 6.00M,
+      //     Toppings.Add(Topping.Name = "Pepperoni", Topping.Price = 1.50M),
+      //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
+      //   }
+
+      //   new MeatPizza(){EntityId = 3, Size.Name = "XL", Size.Price = 18.00M, Crust.Name = "Thin", Crust.Price = 4.00M,
+      //     Toppings.Add(Topping.Name = "Pepperoni", Topping.Price = 1.50M),
+      //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
+      //   }
+      // });
+
+      // builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
+      // {
+      //   new VeggiePizza() { EntityId = 1, Crust = null, Size = null}
+      //   // new VeggiePizza() { EntityId = 2 },
+      // });
+
+
       builder.Entity<Customer>().HasData(new Customer[]
       {
-        new Customer() { EntityId = 1, FirstName = "Uncle", LastName = "John" }
+        new Customer() { EntityId = 1, FirstName = "Uncle", LastName = "John" },
+        new Customer() { EntityId = 2, FirstName = "Kevin", LastName = "Spacer" },
+        new Customer() { EntityId = 3, FirstName = "Sharon", LastName = "Carten" }
+
       });
     }
   }

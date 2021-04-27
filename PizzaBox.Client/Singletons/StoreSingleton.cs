@@ -40,9 +40,6 @@ namespace PizzaBox.Client.Singletons
 
       if (Stores == null)
       {
-        // _context.Stores.AddRange(_fileRepository.ReadFromFile<List<AStore>>(_path));
-        // _context.SaveChanges();
-
         Stores = _context.Stores.ToList();
       }
     }
