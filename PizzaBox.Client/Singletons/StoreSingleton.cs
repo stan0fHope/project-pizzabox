@@ -19,28 +19,29 @@ namespace PizzaBox.Client.Singletons
     private static StoreSingleton _instance;
 
     public List<AStore> Stores { get; }
-    public static StoreSingleton Instance
+    public static StoreSingleton Instance(PizzaBoxContext context)
     {
-      get
+ 
+      if (_instance == null)
       {
-        if (_instance == null)
-        {
-          _instance = new StoreSingleton();
-        }
-
-        return _instance;
+        _instance = new StoreSingleton(context);
       }
+
+      return _instance;
+      
     }
 
     /// <summary>
     /// 
     /// </summary>
-    private StoreSingleton()
+    private StoreSingleton(PizzaBoxContext context)
     {
+      _context = context;
+
       if (Stores == null)
       {
         // _context.Stores.AddRange(_fileRepository.ReadFromFile<List<AStore>>(_path));
-        _context.SaveChanges();
+        // _context.SaveChanges();
 
         Stores = _context.Stores.ToList();
       }

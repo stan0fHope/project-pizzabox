@@ -19,34 +19,33 @@ namespace PizzaBox.Client.Singletons
     private readonly PizzaBoxContext _context = new PizzaBoxContext();
 
     public List<APizza> Pizzas { get; set; }
-    public static PizzaSingleton Instance
+    public static PizzaSingleton Instance(PizzaBoxContext context)
     {
-      get
+      if (_instance == null)
       {
-        if (_instance == null)
-        {
-          _instance = new PizzaSingleton();
-        }
-
-        return _instance;
+        _instance = new PizzaSingleton(context);
       }
+
+      return _instance;
+      
     }
 
     /// <summary>
     /// 
     /// </summary>
-    private PizzaSingleton()
+    private PizzaSingleton(PizzaBoxContext context)
     {
       // _context.Pizzas.AddRange(_fileRepository.ReadFromFile<List<APizza>>(_path));
-      var cp = new CustomPizza();
-      cp.Size = _context.Sizes.FirstOrDefault(s => s.Name == "Medium");
+      // var cp = new CustomPizza();
+      // cp.Size = _context.Sizes.FirstOrDefault(s => s.Name == "Medium");
       // cp.Size = _context.Sizes.FirstOrDefault(s => s.Price = 3.90m);
 
       // cp.Crust = _context.Crusts.FirstOrDefault(c => c.Name == "Thin");
       // cp.Toppings = _context.Toppings.FirstOrDefault(s => s.Name == "Medium");
 
-      _context.Add(cp);
-      _context.SaveChanges();
+      // _context.Add(cp);
+      _context = context;
+      // _context.SaveChanges();
 
       Pizzas = _context.Pizzas.ToList();
     }

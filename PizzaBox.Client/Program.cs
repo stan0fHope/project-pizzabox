@@ -6,7 +6,8 @@ using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Models.Stores;
 using PizzaBox.Domain.Models.Pizzas;
-
+using PizzaBox.Storing;
+using PizzaBox.Storing.Repo;
 
 namespace PizzaBox.Client
 {
@@ -15,11 +16,14 @@ namespace PizzaBox.Client
   /// </summary>
   public class Program
   {
-    private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
-    private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+    private static readonly PizzaBoxContext _context = new PizzaBoxContext();
+    private static readonly CustomerSingleton _customerSingleton = CustomerSingleton.Instance(_context);
+    private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance(_context);
+    private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance(_context);
+    private static readonly OrderRepo _orderRepo = new OrderRepo(_context);
 
-    private static int MAX_PIZZAS = 50;
-    private static int MAX_COST = 250;
+    private static readonly int MAX_PIZZAS = 50;
+    private static readonly int MAX_COST = 250;
 
 
     /// <summary>
@@ -36,17 +40,19 @@ namespace PizzaBox.Client
     private static void Run()
     {
       var order = new Order();
-      order.Customer = new Customer();
 
       Console.WriteLine("Welcome to PizzaBox");
-      order.Store = SelectStore();
-      // Yugioh120!
 
-      // Console.WriteLine("Please enter your first & last name: ");
+      order.Customer = new Customer();
+      Console.WriteLine("Please enter your first & last name: ");      
       string fullname = Console.ReadLine();
-      var names = fullname.Split(' '); 
-      // order.Customer.FirstName = names[0];
-      // order.Customer.LastName = names[1];
+      var names = fullname.Split(' ');       
+      order.Customer.FirstName = names[0];
+      order.Customer.LastName = names[1];      
+      order.Store = SelectStore();
+
+
+     
       // Console.WriteLine(order.Customer.Name);
       
       // order.Store = SelectStore();

@@ -18,7 +18,7 @@ namespace PizzaBox.Storing
     public DbSet<APizza> Pizzas { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Size> Sizes { get; set; }
-    // public DbSet<Crust> Crusts { get; set; }
+    public DbSet<Order> Orders { get; set; }
     // public DbSet<Topping> Toppings { get; set; }
 
 
@@ -63,6 +63,10 @@ namespace PizzaBox.Storing
 
       // builder.Entity<Size>().HasMany<APizza>().WithOne(); // orm is creating the has
       // builder.Entity<APizza>().HasOne<Size>().WithMany();
+      builder.Entity<AStore>().HasMany<Order>(s => s.Orders).WithOne(o => o.Store);
+      builder.Entity<Customer>().HasMany<Order>().WithOne(o => o.Customer);
+      // builder.Entity<APizza>().HasMany<Order>().WithOne(o => o.Pizzas);
+
 
       builder.Entity<ChicagoStore>().HasData(new ChicagoStore[]
       {
