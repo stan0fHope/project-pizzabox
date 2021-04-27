@@ -24,7 +24,7 @@ namespace PizzaBox.Domain.Abstracts
     public long CrustEntityId { get; set; }
     public List<Topping> Toppings { get; set; }
     
-    public IEnumerable<PizzaTops> PizzaTops{get; set;}
+    // public List<PizzaTops> PizzaTops{get; set;}
 
 
     protected APizza()

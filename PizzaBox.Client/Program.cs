@@ -40,7 +40,8 @@ namespace PizzaBox.Client
     private static void Run()
     {
       var order = new Order();
-
+      order.Store = SelectStore();
+      
       Console.WriteLine("Welcome to PizzaBox");
 
       order.Customer = new Customer();
@@ -50,7 +51,6 @@ namespace PizzaBox.Client
       order.Customer.FirstName = names[0];
       order.Customer.LastName = names[1];      
            
-      order.Store = SelectStore();
       order.Pizzas = SelectPizza();
       PrintFinal(order);
 

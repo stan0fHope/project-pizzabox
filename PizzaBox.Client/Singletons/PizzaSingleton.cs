@@ -37,6 +37,7 @@ namespace PizzaBox.Client.Singletons
     {
       // _context.Add(cp);
       _context = context;
+      // _context.includes(Toppings);
       // _context.SaveChanges();
 
       Pizzas = _context.Pizzas.ToList();

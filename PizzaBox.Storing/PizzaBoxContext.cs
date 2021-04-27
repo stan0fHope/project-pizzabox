@@ -22,6 +22,9 @@ namespace PizzaBox.Storing
     public DbSet<Topping> Toppings {get; set;}
     public DbSet<Order> Orders { get; set; }
 
+    // public DbSet<PizzaTops> PizzaTop { get; set; }
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -46,6 +49,8 @@ namespace PizzaBox.Storing
     /// <param name="builder"></param>
     protected override void OnModelCreating(ModelBuilder builder)
     {
+      builder.Entity<Customer>().HasKey(e => e.EntityId);
+
       builder.Entity<AStore>().HasKey(e => e.EntityId);
       builder.Entity<ChicagoStore>().HasBaseType<AStore>();
       builder.Entity<NewYorkStore>().HasBaseType<AStore>();
@@ -60,11 +65,25 @@ namespace PizzaBox.Storing
       builder.Entity<Size>().HasKey(e => e.EntityId);
       builder.Entity<Topping>().HasKey(e => e.EntityId);
 
-      builder.Entity<Customer>().HasKey(e => e.EntityId);
+      // Trying Junstion for Pizza & Toppings
+      // _context.Toppings.includes(Pizzas);
+
+      
+      // builder.Entity<PizzaTops>().HasKey(pt => new {pt.PizzaID, pt.ToppingID});
+      
+      // builder.Entity<PizzaTops>().HasOne<APizza>(pt => pt.PizzaLink)
+      //     .WithMany(s => s.PizzaTops)
+      //     .HasForeignKey(pt => pt.PizzaID);
+
+      // builder.Entity<PizzaTops>().HasOne<Topping>(pt => pt.ToppingLink)
+      //     .WithMany(s => s.PizzaTops)
+      //     .HasForeignKey(pt => pt.ToppingID);
 
       // builder.Entity<Size>().HasMany<APizza>().WithOne(); // orm is creating the has
       builder.Entity<APizza>().HasOne<Size>(p => p.Size).WithMany();
       builder.Entity<APizza>().HasOne<Crust>(p => p.Crust).WithMany();
+
+      
       // builder.Entity<APizza>().HasMany<Topping>(p => p.Toppings).WithMany();
       // builder.Entity<APizza>().includes(Toppings);
       
@@ -123,11 +142,13 @@ namespace PizzaBox.Storing
 
       // });
 
-      // builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
-      // {
-      //   new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1, ToppingEntityId = {1, 2, 3} }
+      builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
+      {
+        new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1 }
+        // new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1, PizzaTops.PizzaLink = 1, PizzaTops.ToppingID = 1}
+        //  new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1}
 
-      // } );
+      } );
 
 
       builder.Entity<Customer>().HasData(new Customer[]
