@@ -8,10 +8,16 @@ namespace PizzaBox.Testing.Tests
 {
     public class StoreTests
     {
-        public static IEnumerable<object[]> values = new List<object[]>()
+    public static IEnumerable<object[]> values = new List<object[]>()
     {
       new object[] { new ChicagoStore() },
       new object[] { new NewYorkStore() }
+    };
+
+    public static IEnumerable<object[]> pizza_values = new List<object[]>()
+    {
+      new object[] { new MeatPizza() },
+      new object[] {new VeggiePizza() };
     };
 
         /// <summary>
@@ -79,6 +85,14 @@ namespace PizzaBox.Testing.Tests
         public void Test_StoreNameSimple(string storeName, int x)
         {
             Assert.NotNull(storeName);
+        }
+
+        [Theory]
+        [MemberData(nameof(pizza_values))]
+
+        public void Test_PizzaPrice()
+        {
+            
         }
         
     }
