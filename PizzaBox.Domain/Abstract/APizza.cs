@@ -21,11 +21,15 @@ namespace PizzaBox.Domain.Abstracts
     // public CrustEnum CrustEnum; if using enum, gotta recompile for chngs
     public Size Size { get; set; }
     public long SizeEntityId { get; set; }
+    public long CrustEntityId { get; set; }
     public List<Topping> Toppings { get; set; }
+    
+    public IEnumerable<PizzaTops> PizzaTops{get; set;}
+
 
     protected APizza()
     {
-      Factory();
+      // Factory();
     }
 
     /// <summary>
@@ -73,7 +77,7 @@ namespace PizzaBox.Domain.Abstracts
 
     // public static decimal TotalPrice()
     // {
-    //   return (Crust.Price + Size.Price + )
+    //   return (APizza.Crust.Price + Size.Price + Topping.Sum(t => t.Price));
     // }
   }
 }

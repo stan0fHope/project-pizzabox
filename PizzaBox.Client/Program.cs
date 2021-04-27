@@ -66,7 +66,7 @@ namespace PizzaBox.Client
       {
         Console.WriteLine($"{item} ");
       }
-      var full = order.TotalCost());
+      var full = order.TotalCost;
       Console.WriteLine($"For a total of: ${full}", full);
       
       _orderRepo.Create(order);
@@ -103,8 +103,6 @@ namespace PizzaBox.Client
 
       return customer;
     }
-
-
 
     /// <summary>
     /// 
@@ -170,7 +168,6 @@ namespace PizzaBox.Client
         orderPizza.Add(pizza);
         PrintOrder(orderPizza);
         
-
         Console.WriteLine("If you would like to add another pizza, enter 1. If ready to submit order, enter 0: "); 
         var valid2 = int.TryParse(Console.ReadLine(), out int input2);
 
@@ -185,9 +182,13 @@ namespace PizzaBox.Client
         }
       }
 
-      // while(orderPizza.Count > MAX_PIZZAS){
-      //   RemovePizza(orderPizza);
-      // }
+      decimal orderCost = orderPizza.Sum(t => (t.Crust.Price + t.Size.Price + t.Toppings.Sum(to => to.Price)));      
+      
+      while(orderPizza.Count > 50 | orderCost > 250 )
+      {
+        RemovePizza(orderPizza);
+      }
+
       return orderPizza;
     }
 

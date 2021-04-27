@@ -17,7 +17,9 @@ namespace PizzaBox.Storing
     public DbSet<AStore> Stores { get; set; }
     public DbSet<APizza> Pizzas { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Crust> Crusts { get; set; }
     public DbSet<Size> Sizes { get; set; }
+    public DbSet<Topping> Toppings {get; set;}
     public DbSet<Order> Orders { get; set; }
 
     /// <summary>
@@ -36,6 +38,7 @@ namespace PizzaBox.Storing
     {
       builder.UseSqlServer(_configuration["mssql"]);
     }
+
 
     /// <summary>
     /// 
@@ -60,7 +63,12 @@ namespace PizzaBox.Storing
       builder.Entity<Customer>().HasKey(e => e.EntityId);
 
       // builder.Entity<Size>().HasMany<APizza>().WithOne(); // orm is creating the has
-      // builder.Entity<APizza>().HasOne<Size>().WithMany();
+      builder.Entity<APizza>().HasOne<Size>(p => p.Size).WithMany();
+      builder.Entity<APizza>().HasOne<Crust>(p => p.Crust).WithMany();
+      // builder.Entity<APizza>().HasMany<Topping>(p => p.Toppings).WithMany();
+      // builder.Entity<APizza>().includes(Toppings);
+      
+
       builder.Entity<AStore>().HasMany<Order>(s => s.Orders).WithOne(o => o.Store);
       builder.Entity<Customer>().HasMany<Order>().WithOne(o => o.Customer);
       // builder.Entity<APizza>().HasMany<Order>().WithOne(o => o.Pizzas);
@@ -105,15 +113,6 @@ namespace PizzaBox.Storing
         new Topping() { EntityId = 8, Name = "Jalapenos", Price = 1.00M }
       });
 
-      // builder.Entity<CustomPizza>().HasData(new CustomPizza[]
-      // {
-      //   new CustomPizza() { EntityId = 1},
-      //   new CustomPizza() { EntityId = 2},
-      //   new CustomPizza() { EntityId = 3},
-      //   new CustomPizza() { EntityId = 4}
-      // });
-
-
 
       // builder.Entity<MeatPizza>().HasData(new MeatPizza[]
       // {
@@ -122,22 +121,13 @@ namespace PizzaBox.Storing
       //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
       //   }
 
-      //   new MeatPizza(){EntityId = 2, Size.Name = "Small", Size.Price = 6.00M, Crust.Name = "Brooklyn", Crust.Price = 6.00M,
-      //     Toppings.Add(Topping.Name = "Pepperoni", Topping.Price = 1.50M),
-      //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
-      //   }
-
-      //   new MeatPizza(){EntityId = 3, Size.Name = "XL", Size.Price = 18.00M, Crust.Name = "Thin", Crust.Price = 4.00M,
-      //     Toppings.Add(Topping.Name = "Pepperoni", Topping.Price = 1.50M),
-      //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
-      //   }
       // });
 
       // builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
       // {
-      //   new VeggiePizza() { EntityId = 1, Crust = null, Size = null}
-      //   // new VeggiePizza() { EntityId = 2 },
-      // });
+      //   new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1, ToppingEntityId = {1, 2, 3} }
+
+      // } );
 
 
       builder.Entity<Customer>().HasData(new Customer[]

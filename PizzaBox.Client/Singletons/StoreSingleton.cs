@@ -53,6 +53,12 @@ namespace PizzaBox.Client.Singletons
                     .ThenInclude(o => o.Pizzas) // load all pizzas for all orders
                     .Where(s => s.Name == store.Name); // LINQ = lang integrated query
 
+      // var pizzas = _context.Pizzas
+      //               .Include(p => p.Crust)
+      //               .Include(s => s.Size)
+      //               .Include(p => p.Toppings)
+      //               .Where(p => p.EntityId = order.Pizza) // looking for specific order
+
       // EF Explicit Loading
       var st = _context.Stores.FirstOrDefault(s => s.Name == store.Name);
       _context.Entry<AStore>(store).Collection<Order>(s => s.Orders).Load(); // load all orders+ properties for 1 store
