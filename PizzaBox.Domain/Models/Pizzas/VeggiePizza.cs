@@ -13,7 +13,7 @@ namespace PizzaBox.Domain.Models.Pizzas
     /// </summary>
     public override void AddCrust(Crust crust)
     {
-      Crust = new Crust() { Name = "Neapolitan" };
+      Crust = new Crust() { Name = "Neapolitan", Price = 8.00M};
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ namespace PizzaBox.Domain.Models.Pizzas
     /// </summary>
     public override void AddSize(Size size)
     {
-      Size = new Size() { Name = "Medium" };
+      Size = new Size() { Name = "Medium", Price = 10.00M };
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ namespace PizzaBox.Domain.Models.Pizzas
     {
       Toppings = new List<Topping>()
       {
-        new Topping() { Name = "Parmigiano" },
-        new Topping() { Name = "Margherita" }
+        new Topping() { Name = "Parmigiano", Price = 2.00M },
+        new Topping() { Name = "Margherita", Price = 2.25M }
       };
     }
   }

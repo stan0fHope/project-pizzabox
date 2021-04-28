@@ -22,8 +22,6 @@ namespace PizzaBox.Storing
     public DbSet<Topping> Toppings {get; set;}
     public DbSet<Order> Orders { get; set; }
 
-    // public DbSet<PizzaTops> PizzaTop { get; set; }
-
 
     /// <summary>
     /// 
@@ -65,32 +63,19 @@ namespace PizzaBox.Storing
       builder.Entity<Size>().HasKey(e => e.EntityId);
       builder.Entity<Topping>().HasKey(e => e.EntityId);
 
-      // Trying Junstion for Pizza & Toppings
-      // _context.Toppings.includes(Pizzas);
-
-      
-      // builder.Entity<PizzaTops>().HasKey(pt => new {pt.PizzaID, pt.ToppingID});
-      
-      // builder.Entity<PizzaTops>().HasOne<APizza>(pt => pt.PizzaLink)
-      //     .WithMany(s => s.PizzaTops)
-      //     .HasForeignKey(pt => pt.PizzaID);
-
-      // builder.Entity<PizzaTops>().HasOne<Topping>(pt => pt.ToppingLink)
-      //     .WithMany(s => s.PizzaTops)
-      //     .HasForeignKey(pt => pt.ToppingID);
-
       // builder.Entity<Size>().HasMany<APizza>().WithOne(); // orm is creating the has
       builder.Entity<APizza>().HasOne<Size>(p => p.Size).WithMany();
       builder.Entity<APizza>().HasOne<Crust>(p => p.Crust).WithMany();
+      builder.Entity<APizza>().HasMany<Topping>(p => p.Toppings);
+      builder.Entity<Topping>().HasMany<APizza>(t => t.Pizzas);
 
-      
-      // builder.Entity<APizza>().HasMany<Topping>(p => p.Toppings).WithMany();
       // builder.Entity<APizza>().includes(Toppings);
       
 
       builder.Entity<AStore>().HasMany<Order>(s => s.Orders).WithOne(o => o.Store);
       builder.Entity<Customer>().HasMany<Order>().WithOne(o => o.Customer);
-      // builder.Entity<APizza>().HasMany<Order>().WithOne(o => o.Pizzas);
+
+      builder.Entity<Order>().HasMany<APizza>(o => o.Pizzas);
 
 
       builder.Entity<ChicagoStore>().HasData(new ChicagoStore[]
@@ -135,20 +120,14 @@ namespace PizzaBox.Storing
 
       // builder.Entity<MeatPizza>().HasData(new MeatPizza[]
       // {
-      //   new MeatPizza(){EntityId = 1, Size.Name = "Medium", Size.Price = 10.00M, Crust.Name = "Stuffed", Crust.Price = 6.00M,
-      //     Toppings.Add(Topping.Name = "Bacon", Topping.Price = 1.50M),
-      //     Toppings.Add(Topping.Name = "Chicken", Topping.Price = 1.50M)};
-      //   }
 
       // });
 
-      builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
-      {
-        new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1 }
-        // new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1, PizzaTops.PizzaLink = 1, PizzaTops.ToppingID = 1}
-        //  new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1}
-
-      } );
+      // builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
+      // {
+      //   new VeggiePizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 1 },
+      //   new VeggiePizza() { EntityId = 2, CrustEntityId = 1, SizeEntityId = 2 }
+      // } );
 
 
       builder.Entity<Customer>().HasData(new Customer[]

@@ -40,18 +40,17 @@ namespace PizzaBox.Client
     private static void Run()
     {
       var order = new Order();
-      order.Store = SelectStore();
-      
       Console.WriteLine("Welcome to PizzaBox");
 
-      order.Customer = new Customer();
       Console.WriteLine("Please enter your first & last name: ");      
       string fullname = Console.ReadLine();
       var names = fullname.Split(' ');       
+      
+      order.Customer = new Customer();
       order.Customer.FirstName = names[0];
       order.Customer.LastName = names[1];      
-           
-      order.Pizzas = SelectPizza();
+      order.Store = SelectStore();
+      order.Pizzas = SelectPizza();     
       PrintFinal(order);
 
     }
@@ -73,7 +72,7 @@ namespace PizzaBox.Client
 
       var orders = _context.Orders.Where(o => (o.Customer.FirstName == order.Customer.FirstName) &  (o.Customer.LastName == order.Customer.LastName));
 
-      PrintListToScreen(orders);
+      // PrintListToScreen(orders);
     }
 
 
@@ -111,9 +110,17 @@ namespace PizzaBox.Client
     {
       var index = 0;
 
-      foreach (var item in _pizzaSingleton.Pizzas)
+      if (_pizzaSingleton.Pizzas == null)
       {
-        Console.WriteLine($"{++index} - {item}");
+         Console.WriteLine("There are no pizzas available at this time.");
+      }
+      else
+      {
+        Console.WriteLine("And we got some pizzas");
+        foreach (var item in _pizzaSingleton.Pizzas)
+        {
+          Console.WriteLine($"{++index} - {item}");          
+        }
       }
     }
 
@@ -162,10 +169,17 @@ namespace PizzaBox.Client
         if (!valid1)
         {
           return null;
-        }
+        }  
+        
+        var testM = new MeatPizza();
+        testM.Crust.Name = "Brooklyn";
+        testM.Crust.Price = 6.00M;
+        testM.Size.Name = "XL";
+        testM.Size.Price = 18.00M;
 
         var pizza = _pizzaSingleton.Pizzas[input1 - 1];
         orderPizza.Add(pizza);
+        orderPizza.Add(testM);
         PrintOrder(orderPizza);
         
         Console.WriteLine("If you would like to add another pizza, enter 1. If ready to submit order, enter 0: "); 
@@ -184,11 +198,10 @@ namespace PizzaBox.Client
 
       decimal orderCost = orderPizza.Sum(t => (t.Crust.Price + t.Size.Price + t.Toppings.Sum(to => to.Price)));      
       
-      while(orderPizza.Count > 50 | orderCost > 250 )
+      while( (orderPizza.Count > 50) | (orderCost > 250) )
       {
         RemovePizza(orderPizza);
       }
-
       return orderPizza;
     }
 
@@ -214,13 +227,12 @@ namespace PizzaBox.Client
     {
       Console.WriteLine("Please select which pizza you would like to remove: ");
       var valid = int.TryParse(Console.ReadLine(), out int input);
-      var x = pizzaList.Count();
-
+      // var x = pizzaList.Count();
       if (!valid)
       {
         Console.WriteLine("That was an invalid value. Please try again.");
       }
-      else if((input -1) > x)
+      else if( (input - 1) > pizzaList.Count() )
       {
         Console.WriteLine("That was an invalid choice. Please try again.");
       }
@@ -229,8 +241,6 @@ namespace PizzaBox.Client
         pizzaList.RemoveAt(input - 1);
       }
     }
-
-
 
   }
 }

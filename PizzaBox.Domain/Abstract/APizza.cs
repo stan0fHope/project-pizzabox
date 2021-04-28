@@ -23,13 +23,10 @@ namespace PizzaBox.Domain.Abstracts
     public long SizeEntityId { get; set; }
     public long CrustEntityId { get; set; }
     public List<Topping> Toppings { get; set; }
-    
-    // public List<PizzaTops> PizzaTops{get; set;}
-
 
     protected APizza()
     {
-      // Factory();
+      Factory();
     }
 
     /// <summary>
@@ -65,6 +62,7 @@ namespace PizzaBox.Domain.Abstracts
     {
       var stringBuilder = new StringBuilder();
       var separator = ", ";
+      // Console.WriteLine("Hello Stan");
 
       foreach (var item in Toppings)
       {
@@ -72,6 +70,8 @@ namespace PizzaBox.Domain.Abstracts
       }
 
       return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
+      // return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
+
     }
 
 
