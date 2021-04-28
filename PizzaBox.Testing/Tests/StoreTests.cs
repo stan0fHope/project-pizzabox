@@ -20,6 +20,12 @@ namespace PizzaBox.Testing.Tests
       new object[] { new VeggiePizza() }
     };
 
+     public static IEnumerable<object[]> orders = new List<object[]>()
+    {
+      new object[] { new Order() },
+      new object[] { new Order() }
+    };
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,20 +54,23 @@ namespace PizzaBox.Testing.Tests
             Assert.True(sut.Name.Equals("NewYorkStore"));
         }
 
-        // [Fact]
-        // public void Test_MeatPizza()
-        // {
-        //     var meat_pie = new MeatPizza();
-        //     Assert.True(meat_pie.Size.Equal("Medium"));
-        // }
 
-        // [Fact]
-        // public void Test_VeggiePizza()
-        // {
-        //     var veg_pie = new VeggiePizza();
-        //     Assert.True(veg_pie.Size.Equal("Medium"));
+
+        [Fact]
+        public void Test_MeatPizza()
+        {
+            var meat_pie = new MeatPizza();
+            Assert.True(meat_pie.Size.Equal("Medium"));
+            Assert.NotNull(meat_pie.Toppings);
+        }
+
+        [Fact]
+        public void Test_VeggiePizza()
+        {
+            var veg_pie = new VeggiePizza();
+            Assert.True(veg_pie.Size.Equal("Medium"));
             
-        // }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -87,12 +96,69 @@ namespace PizzaBox.Testing.Tests
             Assert.NotNull(storeName);
         }
 
-        // [Theory]
-        // [MemberData(nameof(pizza_values))]
+        [Theory]
+        [InlineData("Ken", "Rogers")]
+        public void Test_Customer1(string first, string last)
+        {
+            Assert.NotNull(first);
+            Assert.NotNull(last);
+        }
 
-        // public void Test_PizzaPrice()
-        // {
-            
-        // }
+
+        [Theory]
+        [InlineData("Ken Rogers")]
+        [InlineData("Space Dandi")]
+        [InlineData("LeePenguin")]
+        public void Test_Customer1(string name)
+        {
+
+            Assert.NotNull(name);
+            Assert.True(name.Length >= 5);
+            Assert.True(name.Contains(" "));
+        
+            var name_break = name.Split(" ");
+            string first = name_break[0];
+            string last = name_break[1];
+
+            Assert.NotNull(first);
+            Assert.NotNull(last);
+
+            Assert.True(first.Length >= 3);
+            Assert.True(last.Length >= 3);
+        }
+
+        [Theory]
+        [MemberData(orders)]
+
+        public void Test_Orders(Order o)
+        {
+            Assert.NotNull(o.Pizzas);
+            Assert.NotNull(o.Customer);
+            Assert.NotNull(o.Store);
+            Assert.NotNull(o.Pizzas.TotalPrice() <= 250.00M);
+            Assert.True(o.Pizzas.TotalPrice() <= 250.00M);
+        }
+
+
+
+
+        [Theory]
+        [MemberData(nameof(pizza_values))]
+
+        public void Test_PizzaPrice(APizza pizza)
+        {
+            Assert.NotNull(pizza.TotalPrice());
+            Assert.True(pizza.TotalPrice() <= 250.00M);
+        }
+
+        [Theory]
+        [MemberData(nameof(pizza_values))]
+
+        public void Test_ToppingCount(APizza pizza)
+        {
+            Assert.NotNull(pizza.toppings);
+            Assert.True(pizza.toppings <= 5);
+        }        
+
     }
 }

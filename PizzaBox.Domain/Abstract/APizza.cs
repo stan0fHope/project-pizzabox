@@ -74,10 +74,9 @@ namespace PizzaBox.Domain.Abstracts
 
     }
 
-
-    // public static decimal TotalPrice()
-    // {
-    //   return (APizza.Crust.Price + Size.Price + Topping.Sum(t => t.Price));
-    // }
+    public static decimal TotalPrice()
+    {
+      return (APizza.Crust.Price + Size.Price + Topping.Sum(t => t.Price));
+    }
   }
 }
