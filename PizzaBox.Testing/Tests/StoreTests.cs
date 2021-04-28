@@ -135,7 +135,7 @@ namespace PizzaBox.Testing.Tests
             Assert.NotNull(o.Pizzas);
             Assert.NotNull(o.Customer);
             Assert.NotNull(o.Store);
-            Assert.NotNull(o.Pizzas.TotalPrice() <= 250.00M);
+            Assert.NotNull(o.Pizzas.TotalPrice());
             Assert.True(o.Pizzas.TotalPrice() <= 250.00M);
         }
 
