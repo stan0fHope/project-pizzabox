@@ -14,7 +14,7 @@ namespace PizzaBox.Domain.Models
     {
       get
       {
-        return Pizzas.Sum(t => (t.Crust.Price + t.Size.Price + t.Toppings.Sum(to => to.Price)));
+        return Pizzas.Sum(t => t.TotalPrice);
       }
     }
 

@@ -196,7 +196,7 @@ namespace PizzaBox.Client
         }
       }
 
-      decimal orderCost = orderPizza.Sum(t => t.TotalPrice());      
+      decimal orderCost = orderPizza.Sum(t => t.TotalPrice);      
       
       while( (orderPizza.Count > 50) | (orderCost > 250) )
       {

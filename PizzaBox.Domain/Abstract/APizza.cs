@@ -71,12 +71,15 @@ namespace PizzaBox.Domain.Abstracts
 
       return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
       // return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
-
     }
 
-    public static decimal TotalPrice()
+    public decimal TotalPrice
     {
-      return (APizza.Crust.Price + Size.Price + Topping.Sum(t => t.Price));
+      get
+      {
+        return (Crust.Price + Size.Price + Toppings.Sum(t => t.Price));
+      }
     }
+    
   }
 }
