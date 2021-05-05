@@ -171,15 +171,15 @@ namespace PizzaBox.Client
           return null;
         }  
         
-        var testM = new MeatPizza();
-        testM.Crust.Name = "Brooklyn";
-        testM.Crust.Price = 6.00M;
-        testM.Size.Name = "XL";
-        testM.Size.Price = 18.00M;
+        // var testM = new MeatPizza();
+        // testM.Crust.Name = "Brooklyn";
+        // testM.Crust.Price = 6.00M;
+        // testM.Size.Name = "XL";
+        // testM.Size.Price = 18.00M;
 
         var pizza = _pizzaSingleton.Pizzas[input1 - 1];
         orderPizza.Add(pizza);
-        orderPizza.Add(testM);
+        // orderPizza.Add(testM);
         PrintOrder(orderPizza);
         
         Console.WriteLine("If you would like to add another pizza, enter 1. If ready to submit order, enter 0: "); 
