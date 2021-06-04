@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using PizzaBox.Domain.Models;
-// using PizzaBox.Domain.Models.AComponent;
 
 namespace PizzaBox.Domain.Abstracts
 {
